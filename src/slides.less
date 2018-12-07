@@ -1,0 +1,44 @@
+html {
+  height: 100%;
+
+  body {
+    display: grid;
+    align-items: center;
+    min-height: 100%;
+    margin: 0;
+  }  
+}
+
+article.slide {
+  display: none;
+  padding: 1rem;
+  margin: 0 auto;
+  grid-template-rows: auto 1fr auto;
+  box-shadow: 0 0 30px #888;
+
+  h1 { font-size: 3rem}
+  h2 { font-size: 1.8rem}
+  h3 { font-size: 1.2rem}
+
+  p {font-size: 1.5rem}
+}
+
+article.slide#slide-1 {
+  display: grid;
+}
+
+article.slide.title {
+  grid-template-rows: 1fr 1fr;
+  text-align: center;
+  header {
+    align-self: flex-end;
+    h1, h2, h3 {margin: 0}
+  }
+  section.content {
+    align-self: flex-start;
+    p {margin: 0}
+  }
+  footer {
+    display: none;
+  }
+}
