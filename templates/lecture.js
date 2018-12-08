@@ -64,19 +64,23 @@ function getCurrentSlide(slides) {
 function nextSlide(e) {
   const number = +window.location.hash.slice(1)
   if (document.querySelector(`article[id='${number + 1}']`))
-    window.location.hash = number + 1
+    changeHash(`#${number + 1}`)
 }
 
 function previousSlide(e) {
   const number = +window.location.hash.slice(1)
   if (number > 1)
-    window.location.hash =  number - 1
+    changeHash(`#${number - 1}`)
 }
 
 function fixSlideNumber() {
   const number = +window.location.hash.slice(1)
   if (!document.querySelector(`article[id='${number}']`))
-    window.location.hash = 1
+    changeHash('#1')
+}
+
+function changeHash(hash) {
+  location.replace(hash)
 }
 
 let fixDimensions = fixSlideDimensions.bind(window, 4/3)
