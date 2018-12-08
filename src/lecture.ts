@@ -63,7 +63,7 @@ function render(slides: Slide[], output: string, theme: string) {
 
   let num = 1
   for (const slide of slides) {
-    contents += mustache.render(content, { num, frontmatter: slide.frontmatter, html: slide.html })
+    contents += mustache.render(content, { num, total: slides.length, frontmatter: slide.frontmatter, html: slide.html })
     num += 1
   }
 

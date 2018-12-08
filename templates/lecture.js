@@ -44,13 +44,15 @@ function handleKeyPress(e) {
 
 function handleWheel(e) {
   let delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)))
-  if (delta < 0) previousSlide()
-  if (delta > 0) nextSlide()
+  if (delta > 0) previousSlide()
+  if (delta < 0) nextSlide()
 }
 
 function handleClick(e) {
-  if (e.clientX < window.innerWidth / 2) previousSlide()
-  else nextSlide()
+  if (e.button === 0){
+    if (e.clientX < window.innerWidth / 2) previousSlide()
+    else nextSlide()
+  }
 }
 
 function getCurrentSlide(slides) {

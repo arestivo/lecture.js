@@ -10,7 +10,8 @@ Still in its early stages. Lots of functionalities are missing so use at your ow
 git clone git@github.com:arestivo/lecture.js.git
 cd lecture.js
 npm install
-ts-node src/lecture.ts markdown/lorem.md --theme plain
+npm run less
+ts-node src/lecture.ts markdown/lecture.md --theme plain
 ```
 
 ## Themes

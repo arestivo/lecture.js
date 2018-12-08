@@ -1,6 +1,7 @@
 # Lecture
 
 output/*.html
+templates/lecture.css
 
 # Logs
 logs
