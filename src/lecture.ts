@@ -76,8 +76,8 @@ function render(slides: Slide[], output: string, name: string, theme: string, fr
   contents += mustache.render(header, {
     theme,
     show: yaml.load(frontmatter),
-    css: new minifyCSS({}).minify(readFile('templates/lecture.css')).styles,
-    script: minifyJS(readFile('templates/lecture.js')).code
+    css: new minifyCSS({}).minify(readFile('templates/embed.css')).styles,
+    script: minifyJS(readFile('templates/embed.js')).code
   })
 
   let num = 1
