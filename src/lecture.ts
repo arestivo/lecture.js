@@ -6,6 +6,9 @@ import MarkdownIt from 'markdown-it'
 import fs from 'fs'
 import yaml from 'js-yaml'
 
+const minifyJS = require('babel-minify')
+const minifyCSS = require('clean-css');
+
 interface Slide {
   frontmatter : string
   markdown : string
@@ -62,8 +65,8 @@ function render(slides: Slide[], output: string, theme: string, frontmatter: str
   contents += mustache.render(header, {
     theme,
     show: yaml.load(frontmatter),
-    css: readFile('templates/lecture.css'),
-    script: readFile('templates/lecture.js')
+    css: new minifyCSS({}).minify(readFile('templates/lecture.css')).styles,
+    script: minifyJS(readFile('templates/lecture.js')).code
   })
 
   let num = 1
