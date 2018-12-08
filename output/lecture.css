@@ -9,9 +9,9 @@ html body {
 }
 article.slide {
   display: none;
-  padding: 1rem;
+  padding: 3rem;
   margin: 0 auto;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 1fr auto;
   box-shadow: 0 0 30px #888;
 }
 article.slide h1 {
@@ -26,26 +26,22 @@ article.slide h3 {
 article.slide p {
   font-size: 1.5rem;
 }
-article.slide#slide-1 {
+article.slide:target {
   display: grid;
 }
-article.slide.title {
-  grid-template-rows: 1fr 1fr;
+article.slide footer {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+}
+article.slide footer .center {
   text-align: center;
 }
-article.slide.title header {
-  align-self: flex-end;
+article.slide.title {
+  grid-template-rows: 1fr;
 }
-article.slide.title header h1,
-article.slide.title header h2,
-article.slide.title header h3 {
-  margin: 0;
-}
-article.slide.title section.content {
-  align-self: flex-start;
-}
-article.slide.title section.content p {
-  margin: 0;
+article.slide.title .content {
+  text-align: center;
+  align-self: center;
 }
 article.slide.title footer {
   display: none;
