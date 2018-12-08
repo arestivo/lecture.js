@@ -45,7 +45,7 @@ function build(input: string, output: string, theme: string) {
   const [frontmatter, ...unparsed] = parts
   const slides = unparsed.map(parse).map(markdown)
 
-  render(slides, `${output}/${name}.html`, theme)
+  render(slides, `${output}/${name}.html`, theme, frontmatter)
 }
 
 /**
@@ -53,21 +53,33 @@ function build(input: string, output: string, theme: string) {
  * @param slides The slides to render.
  * @param output The output file.
  */
-function render(slides: Slide[], output: string, theme: string) {
+function render(slides: Slide[], output: string, theme: string, frontmatter: string) {
   const header = readFile('templates/header.mustache')
   const footer = readFile('templates/footer.mustache')
   const content = readFile('templates/slide.mustache')
 
   let contents = ''
-  contents += mustache.render(header, { theme, css: readFile('templates/lecture.css'), script: readFile('templates/lecture.js') })
+  contents += mustache.render(header, {
+    theme,
+    show: yaml.load(frontmatter),
+    css: readFile('templates/lecture.css'),
+    script: readFile('templates/lecture.js')
+  })
 
   let num = 1
   for (const slide of slides) {
-    contents += mustache.render(content, { num, total: slides.length, frontmatter: slide.frontmatter, html: slide.html })
+    contents += mustache.render(content, {
+      num, total: slides.length,
+      show: yaml.load(frontmatter),
+      slide: slide.frontmatter,
+      html: slide.html
+    })
     num += 1
   }
 
-  contents += mustache.render(footer, {})
+  contents += mustache.render(footer, {
+    show: yaml.load(frontmatter),
+  })
 
   fs.writeFileSync(output, contents)
 }

@@ -1,4 +1,5 @@
 title: Lecture.js
+author: André Restivo
 
 ---
 ::: class: title
@@ -28,5 +29,47 @@ git clone git@github.com:arestivo/lecture.js.git
 cd lecture.js
 npm install
 npm run less
+```
+
+This will clone the *Lecture.js* repository from *github*, install all needed dependencies and compile the *less* stylesheets into *css*.
+
+---
+
+# Usage
+
+To use *Lecture.js*, create a markdown file anywhere (e.g. *markdown/lecture.md*) and run the following command:
+
+```bash
+ts-node src/lecture.ts markdown/lecture.md
+```
+
+This will generate a *lecture.html* file inside the *output* folder containing your presentation.
+
+By default, *Lecture.js* uses the *default* theme (duh). If you want to use a different theme just use the *--theme* parameter:
+
+```bash
 ts-node src/lecture.ts markdown/lecture.md --theme plain
 ```
+
+At the moment there are only two different themes, *plain* and *default*, but more will be added shortly.
+
+---
+
+# Markdown
+
+Inside the *markdown* file, slides are separated by 3 dashes. Anything before the first set of dashes is considered *frontmatter* (YAML). Inside each slide you can also add YAML attributes by prefixing lines with 3 colons:
+
+```bash
+ title: Lecture.js     # this is not a slide
+ author: André Restivo
+ ---
+
+ ::: class: title # this is not content
+ # Presentation Title
+
+ ---
+
+ # Slide 2
+```
+
+At this moment, the only frontmatter that can be applied is: *title* and *author*, to the global show frontmatter, and *class*, to the slide frontmatter.
