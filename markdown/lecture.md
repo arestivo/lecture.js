@@ -28,10 +28,10 @@ Installing **Lecture.js** is pretty straightforward if you have *git* and *npm* 
 git clone git@github.com:arestivo/lecture.js.git
 cd lecture.js
 npm install
-npm run less
+npm run build
 ```
 
-This will clone the *Lecture.js* repository from *github*, install all needed dependencies and compile the *less* stylesheets into *css*.
+This will clone the *Lecture.js* repository from *github*, install all needed dependencies and build the system.
 
 ---
 

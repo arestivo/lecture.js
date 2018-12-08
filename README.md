@@ -10,7 +10,7 @@ Still in its early stages. Lots of functionalities are missing so use at your ow
 git clone git@github.com:arestivo/lecture.js.git
 cd lecture.js
 npm install
-npm run less
+npm run build
 ```
 
 ## Usage
