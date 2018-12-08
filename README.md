@@ -17,3 +17,7 @@ ts-node src/lecture.ts markdown/lecture.md --theme plain
 ## Themes
 
 Currently only two themes exist: plain and default
+
+## Demo
+
+A demo can be found here [https://arestivo.github.io/lecture.js/]
