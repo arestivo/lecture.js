@@ -20,7 +20,7 @@ program
   .version('0.0.1')
   .arguments('<markdown>')
   .option('-o, --output <dir>', 'Output directory', 'output')
-  .option('-t, --theme <name>', 'Theme name', 'plain')
+  .option('-t, --theme <name>', 'Theme name', 'default')
   .parse(process.argv)
 
 program.parse(process.argv)

@@ -45,10 +45,10 @@ ts-node src/lecture.ts markdown/lecture.md
 
 This will generate a *lecture.html* file inside the *output* folder containing your presentation.
 
-By default, *Lecture.js* uses the *default* theme (duh). If you want to use a different theme just use the *--theme* parameter:
+By default, *Lecture.js* uses the *default* theme (duh). If you want to use a different theme just use the *--theme* parameter. If you want to create the presentation in a different folder, use the *output* parameter. 
 
 ```bash
-ts-node src/lecture.ts markdown/lecture.md --theme plain
+ts-node src/lecture.ts markdown/lecture.md --theme plain --output html
 ```
 
 At the moment there are only two different themes, *plain* and *default*, but more will be added shortly.
