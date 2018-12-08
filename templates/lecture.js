@@ -27,17 +27,25 @@ function fixSlideDimensions(ratio) {
 }
 
 function handleKeyPress(e) {
-  switch (e.key) {
-    case 'ArrowDown':
-    case 'ArrowRight':
-    case ' ':
+  let charCode = e.keyCode || e.charCode
+
+  switch (charCode) {
+    case 40: // ArrowDown
+    case 39: // ArrowRight
+    case 32: // Space
       nextSlide()
       break
-    case 'ArrowUp':
-    case 'ArrowLeft':
+    case 38: // ArrowUp
+    case 37: // ArrowLeft
       previousSlide()
       break
   }
+}
+
+function handleWheel(e) {
+  let delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)))
+  if (delta < 0) previousSlide()
+  if (delta > 0) nextSlide()
 }
 
 function handleClick(e) {
@@ -77,5 +85,8 @@ window.addEventListener('orientationchange', fixDimensions)
 
 document.addEventListener('click', handleClick)
 document.addEventListener('keypress', handleKeyPress)
+
+document.addEventListener("mousewheel", handleWheel, false);
+document.addEventListener("DOMMouseScroll", handleWheel, false);
 
 fixSlideNumber()
