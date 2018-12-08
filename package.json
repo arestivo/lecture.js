@@ -18,9 +18,11 @@
     "commander": "^2.19.0",
     "js-yaml": "^3.12.0",
     "markdown-it": "^8.4.2",
-    "mustache": "^3.0.1"
+    "mustache": "^3.0.1",
+    "ncp": "^2.0.0"
   },
   "devDependencies": {
+    "@types/clean-css": "^3.4.30",
     "@types/commander": "^2.12.2",
     "@types/js-yaml": "^3.11.2",
     "@types/markdown-it": "0.0.7",

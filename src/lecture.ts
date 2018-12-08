@@ -5,9 +5,10 @@ import mustache from 'mustache'
 import MarkdownIt from 'markdown-it'
 import fs from 'fs'
 import yaml from 'js-yaml'
+import minifyCSS from 'clean-css'
 
 const minifyJS = require('babel-minify')
-const minifyCSS = require('clean-css');
+const ncp = require('ncp').ncp
 
 interface Slide {
   frontmatter : string
@@ -29,7 +30,17 @@ const output = program.output
 const theme = program.theme
 
 if (input === undefined) {
-  console.error('no markdown file specified!')
+  console.error('No markdown file specified!')
+  process.exit(1)
+}
+
+if (!fs.existsSync(input)) {
+  console.error('Markdown file not found!')
+  process.exit(1)
+}
+
+if (!fs.existsSync(`themes/${theme}`)) {
+  console.error('Theme not found!')
   process.exit(1)
 }
 
@@ -48,7 +59,7 @@ function build(input: string, output: string, theme: string) {
   const [frontmatter, ...unparsed] = parts
   const slides = unparsed.map(parse).map(markdown)
 
-  render(slides, `${output}/${name}.html`, theme, frontmatter)
+  render(slides, output, name, theme, frontmatter)
 }
 
 /**
@@ -56,7 +67,7 @@ function build(input: string, output: string, theme: string) {
  * @param slides The slides to render.
  * @param output The output file.
  */
-function render(slides: Slide[], output: string, theme: string, frontmatter: string) {
+function render(slides: Slide[], output: string, name: string, theme: string, frontmatter: string) {
   const header = readFile('templates/header.mustache')
   const footer = readFile('templates/footer.mustache')
   const content = readFile('templates/slide.mustache')
@@ -84,7 +95,11 @@ function render(slides: Slide[], output: string, theme: string, frontmatter: str
     show: yaml.load(frontmatter),
   })
 
-  fs.writeFileSync(output, contents)
+  if (!fs.existsSync(output)) fs.mkdirSync(output)
+  if (!fs.existsSync(`${output}/themes`)) fs.mkdirSync(`${output}/themes`)
+  ncp(`themes/${theme}`, `${output}/themes/${theme}`)
+
+  fs.writeFileSync(`${output}/${name}.html`, contents)
 }
 
 /**

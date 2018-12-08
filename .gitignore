@@ -1,6 +1,6 @@
 # Lecture
 
-output/*.html
+output/
 templates/lecture.css
 
 # Logs
