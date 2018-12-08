@@ -1,4 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather|Raleway');
+
 article.slide {
   color: white;
   background-color: #14A76C;
 }
+
+article.slide { font-family: Merriweather}
+article.slide h1 { font-family: Raleway}
+article.slide h2 { font-family: Raleway}
+article.slide h3 { font-family: Raleway}
