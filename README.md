@@ -20,4 +20,4 @@ Currently only two themes exist: plain and default
 
 ## Demo
 
-A demo can be found [here](https://arestivo.github.io/lecture.js/index.html).
+A demo can be found [here](https://arestivo.github.io/lecture.js/).
