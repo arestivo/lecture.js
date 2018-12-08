@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import program from 'commander'
-import { header, footer, content } from './templates'
 import mustache from 'mustache'
 import MarkdownIt from 'markdown-it'
 import fs from 'fs'
@@ -16,27 +15,29 @@ interface Slide {
 program
   .version('0.0.1')
   .arguments('<markdown>')
-  .option('-o, --output <dir>', 'Output directory')
+  .option('-o, --output <dir>', 'Output directory', 'output')
+  .option('-t, --theme <name>', 'Theme name', 'plain')
   .parse(process.argv)
 
 program.parse(process.argv)
 
 const input = program.args[0]
 const output = program.output
+const theme = program.theme
 
 if (input === undefined) {
   console.error('no markdown file specified!')
   process.exit(1)
 }
 
-build(input, output)
+build(input, output, theme)
 
 /**
  * Builds a slide set from the contents of a markdown file.
  * @param input Path to markdown file.
  * @param output Path to output directory.
  */
-function build(input: string, output?: string) {
+function build(input: string, output: string, theme: string) {
   const name = input.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, '')
   const contents = fs.readFileSync(input, 'utf8')
 
@@ -44,28 +45,31 @@ function build(input: string, output?: string) {
   const [frontmatter, ...unparsed] = parts
   const slides = unparsed.map(parse).map(markdown)
 
-  render(slides, output ? `${output}/${name}.html` : undefined)
+  render(slides, `${output}/${name}.html`, theme)
 }
 
 /**
  * Renders an array of slide into HTML.
  * @param slides The slides to render.
- * @param output The output file (if none renders to console).
+ * @param output The output file.
  */
-function render(slides: Slide[], output?: string) {
+function render(slides: Slide[], output: string, theme: string) {
+  const header = readFile('templates/header.mustache')
+  const footer = readFile('templates/footer.mustache')
+  const content = readFile('templates/slide.mustache')
+
   let contents = ''
-  contents += mustache.render(header, {})
+  contents += mustache.render(header, { theme, css: readFile('templates/lecture.css'), script: readFile('templates/lecture.js') })
+
   let num = 1
   for (const slide of slides) {
     contents += mustache.render(content, { num, frontmatter: slide.frontmatter, html: slide.html })
     num += 1
   }
+
   contents += mustache.render(footer, {})
 
-  if (output !== undefined)
-    fs.writeFileSync(output, contents)
-  else
-    console.log(contents)
+  fs.writeFileSync(output, contents)
 }
 
 /**
@@ -110,4 +114,8 @@ function* split(contents: string) {
     } else part += `${line}\n`
   }
   yield(part)
+}
+
+function readFile(path: string) {
+  return fs.readFileSync(path, 'utf8')
 }

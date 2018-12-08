@@ -73,6 +73,7 @@ let fixDimensions = fixSlideDimensions.bind(window, 4/3)
 
 window.addEventListener('load', fixDimensions)
 window.addEventListener('resize', fixDimensions)
+window.addEventListener('orientationchange', fixDimensions)
 
 document.addEventListener('click', handleClick)
 document.addEventListener('keypress', handleKeyPress)
