@@ -16,7 +16,7 @@ npm run build
 ## Usage
 
 ```bash
-ts-node src/lecture.ts markdown/lecture.md
+ts-node src/generator.ts markdown/lecture.md
 ```
 
 This will generate a *lecture.html* file inside the *output* folder containing your presentation.
@@ -24,7 +24,7 @@ This will generate a *lecture.html* file inside the *output* folder containing y
 By default, *Lecture.js* uses the *default* theme (duh). If you want to use a different theme just use the *--theme* parameter. If you want to create the presentation in a different folder, use the *output* parameter. 
 
 ```bash
-ts-node src/lecture.ts markdown/lecture.md --theme plain --output html
+ts-node src/generator.ts markdown/lecture.md --theme plain --output html
 ```
 
 ## Themes

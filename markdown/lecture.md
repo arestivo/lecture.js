@@ -40,7 +40,7 @@ This will clone the *Lecture.js* repository from *github*, install all needed de
 To use *Lecture.js*, create a markdown file anywhere (e.g. *markdown/lecture.md*) and run the following command:
 
 ```bash
-ts-node src/lecture.ts markdown/lecture.md
+ts-node src/generator.ts markdown/lecture.md
 ```
 
 This will generate a *lecture.html* file inside the *output* folder containing your presentation.
