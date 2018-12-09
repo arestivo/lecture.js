@@ -73,3 +73,23 @@ Inside the *markdown* file, slides are separated by 3 dashes. Anything before th
 ```
 
 At this moment, the only frontmatter that can be applied is: *title* and *author*, to the global show frontmatter, and *class*, to the slide frontmatter.
+
+---
+
+# Features
+
+  * If you have a slide with lots of content
+  * I mean, a really long slide
+  * Like those you're not supposed to do
+  * But do anyway
+  * Because you don't know better
+  * And you really have a lot of points to make
+  * Like, really a lot
+  * And it doesn't seem to stop
+  * Ever
+  * Eventually...
+  * ... you will get out of space
+  * But *Lecture.js* will take care of that for you
+  * So you can go on in your merry life
+  * Without worrying
+  * And just keep doing giant slides

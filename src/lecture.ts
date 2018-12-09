@@ -27,10 +27,11 @@ function fixSlideDimensions(ratio : number) {
 }
 
 function handleKeyPress(e : KeyboardEvent) {
-  switch (e.key) {
+  const key = e.code || e.key
+  switch (key) {
     case 'ArrowDown':
     case 'ArrowRight':
-    case ' ':
+    case 'Space' || ' ':
       nextSlide()
       break
     case 'ArrowUp':
@@ -77,11 +78,8 @@ function changeHash(hash : string) {
 function createHeaders() {
   const slides = document.querySelectorAll('article.slide')
   slides.forEach(slide => {
-    console.log(slide)
     const header = slide.querySelector('header')
     const first = slide.querySelector('.content :first-child')
-    console.log(header)
-    console.log(first)
     if (header !== null && first !== null)
       header.append(first)
   })
@@ -94,7 +92,7 @@ window.addEventListener('resize', fixDimensions)
 window.addEventListener('orientationchange', fixDimensions)
 
 document.addEventListener('click', handleClick)
-document.addEventListener('keypress', handleKeyPress)
+document.addEventListener('keydown', handleKeyPress)
 
 document.addEventListener('wheel', handleWheel, false)
 

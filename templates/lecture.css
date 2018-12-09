@@ -34,6 +34,9 @@ article.slide pre {
   padding: 1em;
   font-size: 1.4rem;
 }
+article.slide li {
+  margin-bottom: 1rem;
+}
 article.slide:target {
   display: grid;
 }

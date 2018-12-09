@@ -21,10 +21,11 @@ function fixSlideDimensions(ratio) {
     }
 }
 function handleKeyPress(e) {
-    switch (e.key) {
+    var key = e.code || e.key;
+    switch (key) {
         case 'ArrowDown':
         case 'ArrowRight':
-        case ' ':
+        case 'Space' || ' ':
             nextSlide();
             break;
         case 'ArrowUp':
@@ -68,11 +69,8 @@ function changeHash(hash) {
 function createHeaders() {
     var slides = document.querySelectorAll('article.slide');
     slides.forEach(function (slide) {
-        console.log(slide);
         var header = slide.querySelector('header');
         var first = slide.querySelector('.content :first-child');
-        console.log(header);
-        console.log(first);
         if (header !== null && first !== null)
             header.append(first);
     });
@@ -82,7 +80,7 @@ window.addEventListener('load', fixDimensions);
 window.addEventListener('resize', fixDimensions);
 window.addEventListener('orientationchange', fixDimensions);
 document.addEventListener('click', handleClick);
-document.addEventListener('keypress', handleKeyPress);
+document.addEventListener('keydown', handleKeyPress);
 document.addEventListener('wheel', handleWheel, false);
 window.addEventListener('load', createHeaders);
 fixSlideNumber();
