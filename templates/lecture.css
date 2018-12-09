@@ -66,3 +66,7 @@ article.slide.title .content {
 article.slide.title footer {
   display: none;
 }
+article.slide.smaller p,
+article.slide.smaller li {
+  font-size: 1.4rem;
+}

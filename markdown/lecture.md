@@ -75,6 +75,7 @@ Inside the *markdown* file, slides are separated by 3 dashes. Anything before th
 At this moment, the only frontmatter that can be applied is: *title* and *author*, to the global show frontmatter, and *class*, to the slide frontmatter.
 
 ---
+::: class: smaller
 
 # Features
 
