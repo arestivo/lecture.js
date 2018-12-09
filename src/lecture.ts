@@ -74,6 +74,19 @@ function changeHash(hash : string) {
   location.replace(hash)
 }
 
+function createHeaders() {
+  const slides = document.querySelectorAll('article.slide')
+  slides.forEach(slide => {
+    console.log(slide)
+    const header = slide.querySelector('header')
+    const first = slide.querySelector('.content :first-child')
+    console.log(header)
+    console.log(first)
+    if (header !== null && first !== null)
+      header.append(first)
+  })
+}
+
 let fixDimensions = fixSlideDimensions.bind(window, 4 / 3)
 
 window.addEventListener('load', fixDimensions)
@@ -84,5 +97,7 @@ document.addEventListener('click', handleClick)
 document.addEventListener('keypress', handleKeyPress)
 
 document.addEventListener('wheel', handleWheel, false)
+
+window.addEventListener('load', createHeaders)
 
 fixSlideNumber()

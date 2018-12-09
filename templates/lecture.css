@@ -11,7 +11,7 @@ article.slide {
   display: none;
   padding: 3rem;
   margin: 0 auto;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: auto 1fr auto;
   box-shadow: 0 0 30px #888;
   cursor: pointer;
 }
@@ -45,11 +45,20 @@ article.slide footer .center {
   text-align: center;
 }
 article.slide.title {
-  grid-template-rows: 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+article.slide.title header {
+  text-align: center;
+  align-self: flex-end;
+}
+article.slide.title header h1,
+article.slide.title header h2,
+article.slide.title header h3 {
+  margin-bottom: 0;
 }
 article.slide.title .content {
   text-align: center;
-  align-self: center;
+  align-self: flex-start;
 }
 article.slide.title footer {
   display: none;

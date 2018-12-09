@@ -65,6 +65,18 @@ function fixSlideNumber() {
 function changeHash(hash) {
     location.replace(hash);
 }
+function createHeaders() {
+    var slides = document.querySelectorAll('article.slide');
+    slides.forEach(function (slide) {
+        console.log(slide);
+        var header = slide.querySelector('header');
+        var first = slide.querySelector('.content :first-child');
+        console.log(header);
+        console.log(first);
+        if (header !== null && first !== null)
+            header.append(first);
+    });
+}
 var fixDimensions = fixSlideDimensions.bind(window, 4 / 3);
 window.addEventListener('load', fixDimensions);
 window.addEventListener('resize', fixDimensions);
@@ -72,4 +84,5 @@ window.addEventListener('orientationchange', fixDimensions);
 document.addEventListener('click', handleClick);
 document.addEventListener('keypress', handleKeyPress);
 document.addEventListener('wheel', handleWheel, false);
+window.addEventListener('load', createHeaders);
 fixSlideNumber();

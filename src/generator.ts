@@ -63,6 +63,33 @@ function build(input: string, output: string, theme: string) {
 }
 
 /**
+ * Parse a single slide into frontmatter and markdown.
+ * @param slide The slide to parse
+ */
+function parse(slide: string) : Slide {
+  const lines = slide.split('\n')
+  let frontmatter = ''
+  let markdown = ''
+  for (const line of lines) {
+    if (line.startsWith(':::'))
+      frontmatter += `${line.slice(3)}\n`
+    else
+      markdown += `${line}\n`
+  }
+  return { markdown, frontmatter: yaml.load(frontmatter) || {}, html: undefined }
+}
+
+/**
+ * Renders a slide markdown and stores in the slide.
+ * @param slide The slide to render.
+ */
+function markdown(slide: Slide) {
+  const parser = new MarkdownIt()
+  slide.html = parser.render(slide.markdown)
+  return slide
+}
+
+/**
  * Renders an array of slide into HTML.
  * @param slides The slides to render.
  * @param output The output file.
@@ -100,33 +127,6 @@ function render(slides: Slide[], output: string, name: string, theme: string, fr
   ncp(`themes/${theme}`, `${output}/themes/${theme}`)
 
   fs.writeFileSync(`${output}/${name}.html`, contents)
-}
-
-/**
- * Parse a single slide into frontmatter and markdown.
- * @param slide The slide to parse
- */
-function parse(slide: string) : Slide {
-  const lines = slide.split('\n')
-  let frontmatter = ''
-  let markdown = ''
-  for (const line of lines) {
-    if (line.startsWith(':::'))
-      frontmatter += `${line.slice(3)}\n`
-    else
-      markdown += `${line}\n`
-  }
-  return { markdown, frontmatter: yaml.load(frontmatter) || {}, html: undefined }
-}
-
-/**
- * Renders a slide markdown and stores in the slide.
- * @param slide The slide to render.
- */
-function markdown(slide: Slide) {
-  const parser = new MarkdownIt()
-  slide.html = parser.render(slide.markdown)
-  return slide
 }
 
 /**
