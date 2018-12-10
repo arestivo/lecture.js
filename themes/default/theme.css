@@ -9,3 +9,9 @@ article.slide { font-family: Merriweather}
 article.slide h1 { font-family: Raleway}
 article.slide h2 { font-family: Raleway}
 article.slide h3 { font-family: Raleway}
+
+article.slide table {
+  background-color: #0f794f;
+  color: white;
+  border-spacing: 1em;
+}
