@@ -84,13 +84,19 @@ function build(input: string, output: string, theme: string, assets: string) {
  */
 function parse(slide: string) : Slide {
   const lines = slide.split('\n')
+
+  let frontmatterEnded = false
   let frontmatter = ''
   let markdown = ''
+
   for (const line of lines) {
-    if (line.startsWith(':::'))
-      frontmatter += `${line.slice(3)}\n`
-    else
+    const match = line.match(/^(\w+):\s*(.+)/)
+    if (!frontmatterEnded && match) {
+      frontmatter += `${line}\n`
+    } else {
+      frontmatterEnded = true
       markdown += `${line}\n`
+    }
   }
   return { markdown, frontmatter: yaml.load(frontmatter) || {}, html: undefined }
 }

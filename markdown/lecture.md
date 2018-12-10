@@ -2,7 +2,7 @@ title: Lecture.js
 author: André Restivo
 
 ---
-::: class: title
+class: title
 
 # Lecture.js
 
@@ -57,14 +57,14 @@ At the moment there are only two different themes, *plain* and *default*, but mo
 
 # Markdown
 
-Inside the *markdown* file, slides are separated by 3 dashes. Anything before the first set of dashes is considered *frontmatter* (YAML). Inside each slide you can also add YAML attributes by prefixing lines with 3 colons:
+Inside the *markdown* file, slides are separated by 3 dashes. Anything before the first set of dashes is considered *frontmatter* (YAML). Inside each slide you can also add YAML in the beginning of the slide:
 
 ```bash
  title: Lecture.js     # this is not a slide
  author: André Restivo
- ---
 
- ::: class: title # this is not content
+ ---
+ class: title # this is not content
  # Presentation Title
 
  ---
@@ -75,13 +75,12 @@ Inside the *markdown* file, slides are separated by 3 dashes. Anything before th
 At this moment, the only frontmatter that can be applied is: *title* and *author*, to the global show frontmatter, and *class*, to the slide frontmatter.
 
 ---
-
-::: class: separator
+class: separator
 
 # Features
 
 ---
-::: class: size-75
+class: size-75
 
 # Classes
 
