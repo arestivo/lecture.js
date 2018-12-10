@@ -74,6 +74,7 @@ article.slide {
 }
 
 article.slide.title {
+  background-color: #1499a7;
   grid-template-rows: 1fr 1fr;
 
   header {
@@ -94,6 +95,26 @@ article.slide.title {
     display: none;
   }
 }
+
+article.slide.separator {
+  background-color: #a71450;
+  grid-template-rows: 1fr 0;
+
+  header {
+    text-align: center;
+    align-self: center;
+  }
+
+  .content {
+    text-align: center;
+    align-self: flex-start;
+  }
+
+  footer {
+    display: none;
+  }
+}
+
 
 article.slide.smaller {
   p, li {font-size: 1.4rem; }

@@ -72,6 +72,7 @@ article.slide img {
   margin: 0 auto;
 }
 article.slide.title {
+  background-color: #1499a7;
   grid-template-rows: 1fr 1fr;
 }
 article.slide.title header {
@@ -88,6 +89,21 @@ article.slide.title .content {
   align-self: flex-start;
 }
 article.slide.title footer {
+  display: none;
+}
+article.slide.separator {
+  background-color: #a71450;
+  grid-template-rows: 1fr 0;
+}
+article.slide.separator header {
+  text-align: center;
+  align-self: center;
+}
+article.slide.separator .content {
+  text-align: center;
+  align-self: flex-start;
+}
+article.slide.separator footer {
   display: none;
 }
 article.slide.smaller p,
