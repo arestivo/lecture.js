@@ -2,20 +2,24 @@
 
 import program from 'commander'
 import mustache from 'mustache'
-import MarkdownIt from 'markdown-it'
 import fs from 'fs'
 import yaml from 'js-yaml'
-import minifyCSS from 'clean-css'
 
-const minifyJS = require('babel-minify')
-const ncp = require('ncp').ncp
-const rmdir = require('rimraf')
+import MarkdownIt from 'markdown-it'
+
+import minifyCSS from 'clean-css'
+import minifyJS from 'babel-minify'
+
+import rmdir from 'rimraf'
+import ncp from 'ncp'
 
 interface Slide {
   frontmatter : string
   markdown : string
   html? : string
 }
+
+const markdownIt = new MarkdownIt()
 
 program
   .version('0.0.1')
@@ -91,8 +95,7 @@ function parse(slide: string) : Slide {
  * @param slide The slide to render.
  */
 function markdown(slide: Slide) {
-  const parser = new MarkdownIt()
-  slide.html = parser.render(slide.markdown)
+  slide.html = markdownIt.render(slide.markdown)
   return slide
 }
 
@@ -111,7 +114,7 @@ function render(slides: Slide[], frontmatter: string, output: string, name: stri
     theme,
     show: yaml.load(frontmatter),
     'lecture-css': new minifyCSS({}).minify(readFile('templates/lecture.css')).styles,
-    'lecture-script': minifyJS(readFile('templates/lecture.js')).code
+    'lecture-script': minifyJS(readFile('templates/lecture.js'), {}, {}).code
   })
 
   let num = 1
@@ -129,6 +132,7 @@ function render(slides: Slide[], frontmatter: string, output: string, name: stri
     show: yaml.load(frontmatter),
   })
 
+  if (!fs.existsSync(output)) fs.mkdirSync(output)
   fs.writeFileSync(`${output}/${name}.html`, contents)
 }
 
@@ -143,7 +147,7 @@ function copyTheme(theme : string, output : string) {
   if (fs.existsSync(`${output}/themes/${theme}`))
     rmdir.sync(`${output}/themes/${theme}`)
 
-  ncp(`themes/${theme}`, `${output}/themes/${theme}`)
+  ncp.ncp(`themes/${theme}`, `${output}/themes/${theme}`, _ => {})
 }
 
 function copyAssets(assets: string, output: string, name: string) {
@@ -152,7 +156,7 @@ function copyAssets(assets: string, output: string, name: string) {
   if (fs.existsSync(`${output}/assets/${name}`))
     rmdir.sync(`${output}/assets/${name}`)
 
-  ncp(`${assets}`, `${output}/assets/${name}`)
+  ncp.ncp(`${assets}`, `${output}/assets/${name}`, _ => {})
 }
 
 /**

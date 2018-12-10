@@ -120,3 +120,4 @@ At this moment, the only frontmatter that can be applied is: *title* and *author
 ```
 
 ![A dog](assets/lecture/dog.jpg)
+{small}
