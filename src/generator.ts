@@ -51,6 +51,11 @@ if (!fs.existsSync(`themes/${theme}`)) {
   process.exit(1)
 }
 
+if (assets !== undefined && !fs.existsSync(`${assets}`)) {
+  console.error('Assets not found!')
+  process.exit(1)
+}
+
 build(input, output, theme, assets)
 
 /**
