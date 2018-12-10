@@ -1,8 +1,8 @@
 # Lecture
 
 output/
-templates/embed.css
-templates/embed.js
+templates/lecture.css
+templates/lecture.js
 
 # Logs
 logs

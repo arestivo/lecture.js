@@ -48,16 +48,6 @@ article.slide {
       text-align: center;
     }
   }
-}
-
-article.slide:target {
-  display: grid;
-}
-
-article.slide {
-  .content {
-    align-self: center;
-  }
 
   footer {
     display: grid;
@@ -71,6 +61,14 @@ article.slide {
     display: block;
     margin: 0 auto;
   }
+
+  .content {
+    align-self: center;
+  }
+}
+
+article.slide:target {
+  display: grid;
 }
 
 article.slide.title {
@@ -114,7 +112,6 @@ article.slide.separator {
     display: none;
   }
 }
-
 
 article.slide.smaller {
   p, li {font-size: 1.4rem; }
