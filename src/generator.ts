@@ -9,6 +9,7 @@ import minifyCSS from 'clean-css'
 
 const minifyJS = require('babel-minify')
 const ncp = require('ncp').ncp
+const rmdir = require('rimraf')
 
 interface Slide {
   frontmatter : string
@@ -20,6 +21,7 @@ program
   .version('0.0.1')
   .arguments('<markdown>')
   .option('-o, --output <dir>', 'Output directory', 'output')
+  .option('-a, --assets <dir>', 'Assets directory')
   .option('-t, --theme <name>', 'Theme name', 'default')
   .parse(process.argv)
 
@@ -28,6 +30,7 @@ program.parse(process.argv)
 const input = program.args[0]
 const output = program.output
 const theme = program.theme
+const assets = program.assets
 
 if (input === undefined) {
   console.error('No markdown file specified!')
@@ -44,14 +47,14 @@ if (!fs.existsSync(`themes/${theme}`)) {
   process.exit(1)
 }
 
-build(input, output, theme)
+build(input, output, theme, assets)
 
 /**
  * Builds a slide set from the contents of a markdown file.
  * @param input Path to markdown file.
  * @param output Path to output directory.
  */
-function build(input: string, output: string, theme: string) {
+function build(input: string, output: string, theme: string, assets: string) {
   const name = input.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, '')
   const contents = fs.readFileSync(input, 'utf8')
 
@@ -59,7 +62,11 @@ function build(input: string, output: string, theme: string) {
   const [frontmatter, ...unparsed] = parts
   const slides = unparsed.map(parse).map(markdown)
 
-  render(slides, output, name, theme, frontmatter)
+  render(slides, frontmatter, output, name)
+
+  copyTheme(theme, output)
+  if (assets !== undefined)
+    copyAssets(assets, output, name)
 }
 
 /**
@@ -94,7 +101,7 @@ function markdown(slide: Slide) {
  * @param slides The slides to render.
  * @param output The output file.
  */
-function render(slides: Slide[], output: string, name: string, theme: string, frontmatter: string) {
+function render(slides: Slide[], frontmatter: string, output: string, name: string) {
   const header = readFile('templates/header.mustache')
   const footer = readFile('templates/footer.mustache')
   const content = readFile('templates/slide.mustache')
@@ -122,11 +129,30 @@ function render(slides: Slide[], output: string, name: string, theme: string, fr
     show: yaml.load(frontmatter),
   })
 
+  fs.writeFileSync(`${output}/${name}.html`, contents)
+}
+
+/**
+ * Copies a theme to the output directory
+ * @param theme The name of the theme to copy.
+ * @param output Output directory
+ */
+function copyTheme(theme : string, output : string) {
   if (!fs.existsSync(output)) fs.mkdirSync(output)
   if (!fs.existsSync(`${output}/themes`)) fs.mkdirSync(`${output}/themes`)
-  ncp(`themes/${theme}`, `${output}/themes/${theme}`)
+  if (fs.existsSync(`${output}/themes/${theme}`))
+    rmdir.sync(`${output}/themes/${theme}`)
 
-  fs.writeFileSync(`${output}/${name}.html`, contents)
+  ncp(`themes/${theme}`, `${output}/themes/${theme}`)
+}
+
+function copyAssets(assets: string, output: string, name: string) {
+  if (!fs.existsSync(output)) fs.mkdirSync(output)
+  if (!fs.existsSync(`${output}/assets`)) fs.mkdirSync(`${output}/assets`)
+  if (fs.existsSync(`${output}/assets/${name}`))
+    rmdir.sync(`${output}/assets/${name}`)
+
+  ncp(`${assets}`, `${output}/assets/${name}`)
 }
 
 /**

@@ -19,7 +19,8 @@
     "js-yaml": "^3.12.0",
     "markdown-it": "^8.4.2",
     "mustache": "^3.0.1",
-    "ncp": "^2.0.0"
+    "ncp": "^2.0.0",
+    "rimraf": "^2.6.2"
   },
   "devDependencies": {
     "@types/clean-css": "^3.4.30",

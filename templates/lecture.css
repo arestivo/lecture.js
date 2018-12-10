@@ -25,7 +25,9 @@ article.slide h3 {
   font-size: 2rem;
 }
 article.slide p,
-article.slide li {
+article.slide li,
+article.slide td,
+article.slide th {
   font-size: 1.8rem;
 }
 article.slide pre {
@@ -37,8 +39,26 @@ article.slide pre {
 article.slide li {
   margin-bottom: 1rem;
 }
+article.slide table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid;
+}
+article.slide table th {
+  border-bottom: 1px solid;
+}
+article.slide table td,
+article.slide table th {
+  padding: 0.5em;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  text-align: center;
+}
 article.slide:target {
   display: grid;
+}
+article.slide .content {
+  align-self: center;
 }
 article.slide footer {
   display: grid;
@@ -46,6 +66,10 @@ article.slide footer {
 }
 article.slide footer .center {
   text-align: center;
+}
+article.slide img {
+  display: block;
+  margin: 0 auto;
 }
 article.slide.title {
   grid-template-rows: 1fr 1fr;

@@ -21,7 +21,7 @@ article.slide {
   h2 { font-size: 2.4rem; }
   h3 { font-size: 2rem; }
 
-  p, li {font-size: 1.8rem; }
+  p, li, td, th {font-size: 1.8rem; }
 
   pre {
     background-color: #333;
@@ -31,17 +31,45 @@ article.slide {
   }
 
   li { margin-bottom: 1rem; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid;
+
+    th {
+      border-bottom: 1px solid;
+    }
+
+    td, th {
+      padding: 0.5em;
+      border-left: 1px solid;
+      border-right: 1px solid;
+      text-align: center;
+    }
+  }
 }
 
 article.slide:target {
   display: grid;
 }
 
-article.slide footer {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  .center {
-    text-align: center;
+article.slide {
+  .content {
+    align-self: center;
+  }
+
+  footer {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    .center {
+      text-align: center;
+    }
+  }
+
+  img {
+    display: block;
+    margin: 0 auto;
   }
 }
 

@@ -94,3 +94,29 @@ At this moment, the only frontmatter that can be applied is: *title* and *author
   * So you can go on in your merry life
   * Without worrying
   * And just keep doing giant slides
+
+---
+
+# Tables
+
+```
+|                          | Mean   | Median | Deviation |
+|:------------------------:|--------|--------|-----------|
+|          Friends         | 40     | 40     | 6.303018  |
+| Friend's Friends Average | 41.001 | 41     | 1.047535  |
+```
+
+|                          | Mean   | Median | Deviation |
+|:------------------------:|--------|--------|-----------|
+|          Friends         | 40     | 40     | 6.303018  |
+| Friend's Friends Average | 41.001 | 41     | 1.047535  |
+
+---
+
+# Images
+
+```
+![A dog](assets/lecture/dog.jpg)
+```
+
+![A dog](assets/lecture/dog.jpg)
