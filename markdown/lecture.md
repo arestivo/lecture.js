@@ -81,7 +81,7 @@ At this moment, the only frontmatter that can be applied is: *title* and *author
 # Features
 
 ---
-::: class: smaller
+::: class: size-75
 
 # Classes
 

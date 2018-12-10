@@ -1,3 +1,8 @@
+@h1-size: 3rem;
+@h2-size: 2.4rem;
+@h3-size: 2rem;
+@text-size: 1.8rem;  
+
 html {
   height: 100%;
 
@@ -17,11 +22,11 @@ article.slide {
   box-shadow: 0 0 30px #888;
   cursor: pointer;
 
-  h1 { font-size: 3rem; }
-  h2 { font-size: 2.4rem; }
-  h3 { font-size: 2rem; }
+  h1 { font-size: @h1-size; }
+  h2 { font-size: @h2-size; }
+  h3 { font-size: @h3-size; }
 
-  p, li, td, th {font-size: 1.8rem; }
+  p, li, td, th { font-size: @text-size; }
 
   pre {
     background-color: #333;
@@ -60,10 +65,6 @@ article.slide {
   img {
     display: block;
     margin: 0 auto;
-  }
-
-  .content {
-    align-self: center;
   }
 }
 
@@ -113,6 +114,14 @@ article.slide.separator {
   }
 }
 
-article.slide.smaller {
-  p, li {font-size: 1.4rem; }
+article.slide.size-75 {
+  p, li, td, th { font-size: @text-size * 0.75; }
+}
+
+article.slide.size-66 {
+  p, li, td, th { font-size: @text-size * 0.66; }
+}
+
+article.slide.size-50 {
+  p, li, td, th { font-size: @text-size * 0.50; }
 }
