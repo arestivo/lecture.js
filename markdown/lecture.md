@@ -111,6 +111,7 @@ class: size-75
 | Friend's Friends Average | 41.001 |   41   | 1.047535  |
 ```
 
+
 |                          | Mean   | Median | Deviation |
 |--------------------------|:------:|:------:|:---------:|
 | Friends                  |   40   |   40   | 6.303018  |

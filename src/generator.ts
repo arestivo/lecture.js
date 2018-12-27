@@ -158,6 +158,7 @@ function copyLecture(output: string) {
   if (!fs.existsSync(`${output}/lecture.js`)) fs.mkdirSync(`${output}/lecture.js`)
 
   fs.copyFileSync('templates/lecture.css', `${output}/lecture.js/lecture.css`)
+  fs.copyFileSync('templates/print.css', `${output}/lecture.js/print.css`)
   fs.copyFileSync('templates/lecture.js', `${output}/lecture.js/lecture.js`)
 }
 
