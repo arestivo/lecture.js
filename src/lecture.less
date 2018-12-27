@@ -67,7 +67,6 @@ article.slide {
   img {
     display: block;
     margin: 0 auto;
-    width: 10em;
   }
 }
 
@@ -76,7 +75,6 @@ article.slide:target {
 }
 
 article.slide.title {
-  background-color: #1499a7;
   grid-template-rows: 1fr 1fr;
 
   header {
@@ -91,6 +89,7 @@ article.slide.title {
   .content {
     text-align: center;
     align-self: flex-start;
+    overflow: hidden;
   }
 
   footer {
@@ -99,7 +98,6 @@ article.slide.title {
 }
 
 article.slide.separator {
-  background-color: #a71450;
   grid-template-rows: 1fr 0;
 
   header {
