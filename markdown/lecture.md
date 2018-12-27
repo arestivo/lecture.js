@@ -125,4 +125,4 @@ class: size-75
 ![A dog](assets/lecture/dog.jpg)
 ```
 
-![A dog](assets/lecture/dog.jpg)
+![A dog](assets/lecture/dog.jpg){width=20%}

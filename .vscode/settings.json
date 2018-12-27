@@ -3,6 +3,7 @@
     "content",
     "frontmatter",
     "lessc",
+    "resizer",
     "themeable",
     "unparsed",
     "unscale"

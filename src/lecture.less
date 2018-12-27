@@ -9,7 +9,7 @@ html {
   body {
     display: grid;
     align-items: center;
-    min-height: 100%;
+    height: 100%;
     margin: 0;
   }  
 }
@@ -55,6 +55,14 @@ article.slide {
     }
   }
 
+  .resizer {
+    overflow: hidden;
+  }
+
+  .content {
+    padding-bottom: 1em;
+  }
+
   footer {
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -66,6 +74,7 @@ article.slide {
   img {
     display: block;
     margin: 0 auto;
+    max-width: 80%;
   }
 
   .wide {
@@ -92,7 +101,6 @@ article.slide.title {
   .content {
     text-align: center;
     align-self: flex-start;
-    overflow: hidden;
   }
 
   footer {
@@ -116,16 +124,4 @@ article.slide.separator {
   footer {
     display: none;
   }
-}
-
-article.slide.size-75 {
-  p, li, td, th { font-size: @text-size * 0.75; }
-}
-
-article.slide.size-66 {
-  p, li, td, th { font-size: @text-size * 0.66; }
-}
-
-article.slide.size-50 {
-  p, li, td, th { font-size: @text-size * 0.50; }
 }

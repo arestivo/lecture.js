@@ -10,6 +10,16 @@ article.slide h1 { font-family: Raleway}
 article.slide h2 { font-family: Raleway}
 article.slide h3 { font-family: Raleway}
 
+article.slide img {
+  padding: 1em;
+  background-color: white;
+}
+
+article.slide a {
+  color: #b1f6da;
+  text-decoration: none;
+}
+
 article.slide table {
   background-color: #0f794f;
   color: white;

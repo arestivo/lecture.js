@@ -24,6 +24,32 @@ function fixSlideDimensions(ratio : number) {
     slide.style.width = `${browserWidth - paddingLeft - paddingRight}px`
     slide.style.height = `${browserHeight - paddingTop - paddingBottom}px`
   }
+
+  setTimeout(resizeSlideContent, 100)
+}
+
+function resizeSlideContent() {
+  //TODO: Find a better way to resize slides. Maybe start by resizing only images!
+
+  const number = +window.location.hash.slice(1)
+
+  const resizer = <HTMLElement> document.querySelector(`article[id='${number}'] .resizer`)
+  if (resizer == null) return
+
+  const content = <HTMLElement> document.querySelector(`article[id='${number}'] .content`)
+  if (content == null) return
+
+  content.style.transform = 'scaleY(1)'
+  resizer.style.overflow = 'auto'
+
+  if (resizer.clientHeight < content.clientHeight) {
+    const scale = resizer.clientHeight / content.clientHeight
+
+    content.style.transformOrigin = '0 0'
+    content.style.transform = `scaleY(${scale})`
+  }
+
+  resizer.style.overflow = 'hidden'
 }
 
 function handleKeyPress(e : KeyboardEvent) {
@@ -73,6 +99,7 @@ function fixSlideNumber() {
 
 function changeHash(hash : string) {
   location.replace(hash)
+  resizeSlideContent()
 }
 
 function createHeaders() {
@@ -98,4 +125,4 @@ document.addEventListener('wheel', handleWheel, false)
 
 window.addEventListener('load', createHeaders)
 
-fixSlideNumber()
+window.addEventListener('load', fixSlideNumber)

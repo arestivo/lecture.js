@@ -12,7 +12,7 @@ import rmdir from 'rimraf'
 import ncp from 'ncp'
 
 interface Slide {
-  frontmatter : string
+  frontmatter : Object
   markdown : string
   html? : string
 }
@@ -102,6 +102,7 @@ function parse(slide: string) : Slide {
       markdown += `${line}\n`
     }
   }
+
   return { markdown, frontmatter: yaml.load(frontmatter) || {}, html: undefined }
 }
 
@@ -127,14 +128,14 @@ function render(slides: Slide[], frontmatter: string, output: string, name: stri
   let contents = ''
   contents += mustache.render(header, {
     theme,
-    show: yaml.load(frontmatter)
+    show: yaml.load(frontmatter) || {}
   })
 
   let num = 1
   for (const slide of slides) {
     contents += mustache.render(content, {
       num, total: slides.length,
-      show: yaml.load(frontmatter),
+      show: yaml.load(frontmatter) || {},
       slide: slide.frontmatter,
       html: slide.html
     })
@@ -142,7 +143,7 @@ function render(slides: Slide[], frontmatter: string, output: string, name: stri
   }
 
   contents += mustache.render(footer, {
-    show: yaml.load(frontmatter),
+    show: yaml.load(frontmatter) || {},
   })
 
   if (!fs.existsSync(output)) fs.mkdirSync(output)
