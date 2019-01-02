@@ -52,7 +52,7 @@ if (!fs.existsSync(input)) {
 }
 
 // Verify if theme exists
-if (!fs.existsSync(`themes/${theme}`)) {
+if (!fs.existsSync(`src/themes/${theme}`)) {
   console.error('Theme not found!')
   process.exit(1)
 }
@@ -126,9 +126,9 @@ function markdown(slide: Slide) {
  * @param output The output file.
  */
 function render(slides: Slide[], frontmatter: string, output: string, name: string) {
-  const header = readFile('templates/header.mustache')
-  const footer = readFile('templates/footer.mustache')
-  const content = readFile('templates/slide.mustache')
+  const header = readFile('src/templates/header.mustache')
+  const footer = readFile('src/templates/footer.mustache')
+  const content = readFile('src/templates/slide.mustache')
 
   let contents = ''
   contents += mustache.render(header, {
@@ -163,9 +163,9 @@ function copyLecture(output: string) {
   if (!fs.existsSync(output)) fs.mkdirSync(output)
   if (!fs.existsSync(`${output}/lecture.js`)) fs.mkdirSync(`${output}/lecture.js`)
 
-  fs.copyFileSync('templates/lecture.css', `${output}/lecture.js/lecture.css`)
-  fs.copyFileSync('templates/print.css', `${output}/lecture.js/print.css`)
-  fs.copyFileSync('templates/lecture.js', `${output}/lecture.js/lecture.js`)
+  fs.copyFileSync('bin/frontend/lecture.css', `${output}/lecture.js/lecture.css`)
+  fs.copyFileSync('bin/frontend/print.css', `${output}/lecture.js/print.css`)
+  fs.copyFileSync('bin/frontend/lecture.js', `${output}/lecture.js/lecture.js`)
 }
 
 /**
@@ -179,7 +179,7 @@ function copyTheme(theme : string, output : string) {
   if (fs.existsSync(`${output}/themes/${theme}`))
     rmdir.sync(`${output}/themes/${theme}`)
 
-  ncp.ncp(`themes/${theme}`, `${output}/themes/${theme}`, _ => {})
+  ncp.ncp(`src/themes/${theme}`, `${output}/themes/${theme}`, _ => {})
 }
 
 /**

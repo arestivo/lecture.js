@@ -1,8 +1,7 @@
 # Lecture
 
 output/
-templates/lecture.css
-templates/lecture.js
+bin/
 
 # Logs
 logs

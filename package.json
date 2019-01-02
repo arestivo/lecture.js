@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "lessc src/print.less templates/print.css && lessc src/lecture.less templates/lecture.css && tsc src/lecture.ts -outDir templates"
+    "build": "lessc src/frontend/print.less bin/frontend/print.css && lessc src/frontend/lecture.less bin/frontend/lecture.css && tsc src/frontend/lecture.ts -outDir bin/frontend"
   },
   "author": "André Restivo",
   "license": "MIT",
