@@ -3,10 +3,13 @@
 import program from 'commander'
 import mustache from 'mustache'
 import fs from 'fs'
+import path from 'path'
 import yaml from 'js-yaml'
 
 import MarkdownIt from 'markdown-it'
-import markdownItAttrs from 'markdown-it-attrs';
+import markdownItAttrs from 'markdown-it-attrs'
+
+import markdownItHighlight from 'markdown-it-highlightjs'
 
 import rmdir from 'rimraf'
 import ncp from 'ncp'
@@ -19,12 +22,13 @@ interface Slide {
 
 const markdownIt = new MarkdownIt()
 markdownIt.use(markdownItAttrs)
+markdownIt.use(markdownItHighlight)
 
 program
   .version('0.0.1')
   .arguments('<markdown>')
   .option('-o, --output <dir>', 'Output directory', 'output')
-  .option('-a, --assets <dir>', 'Assets directory (default: "assets/<name>")')
+  .option('-a, --assets <dir>', 'Assets directory (default: "<markdown dir>/<name>")')
   .option('-t, --theme <name>', 'Theme name', 'default')
   .parse(process.argv)
 
@@ -70,6 +74,7 @@ build(input, output, theme, assets)
 function build(input: string, output: string, theme: string, assets: string) {
   const name = input.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, '')
   const contents = fs.readFileSync(input, 'utf8')
+  const folder = path.dirname(input)
 
   const parts = [...split(contents)]
   const [frontmatter, ...unparsed] = parts
@@ -79,7 +84,7 @@ function build(input: string, output: string, theme: string, assets: string) {
 
   copyLecture(output)
   copyTheme(theme, output)
-  copyAssets(assets, output, name)
+  copyAssets(assets, output, folder, name)
 }
 
 /**
@@ -184,9 +189,9 @@ function copyTheme(theme : string, output : string) {
  * @param output The output folder
  * @param name The markdown name
  */
-function copyAssets(assets: string, output: string, name: string) {
-  if (assets === undefined && fs.existsSync(`assets/${name}`)) {
-    copyAssets(`assets/${name}`, output, name)
+function copyAssets(assets: string, output: string, folder: string, name: string) {
+  if (assets === undefined && fs.existsSync(`${folder}/${name}`)) {
+    copyAssets(`${folder}/${name}`, output, folder, name)
   } else {
     if (!fs.existsSync(output)) fs.mkdirSync(output)
     if (!fs.existsSync(`${output}/assets`)) fs.mkdirSync(`${output}/assets`)
