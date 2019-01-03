@@ -3,6 +3,11 @@
 @h3-size: 2rem;
 @text-size: 1.8rem;  
 
+:root {
+  --slide-width: 100%;
+  --slide-height: 100%;  
+}
+
 html {
   height: 100%;
 
@@ -15,6 +20,9 @@ html {
 }
 
 article.slide {
+  width: var(--slide-width);
+  height: var(--slide-height);
+
   display: none;
   padding: 3rem;
   margin: 0 auto;
@@ -31,6 +39,10 @@ article.slide {
   pre code {
     padding: 1em;
     font-size: 1.4rem;
+  }
+
+  ul {
+    padding-left: 2em;
   }
 
   li { margin-bottom: 1rem; }
@@ -58,6 +70,9 @@ article.slide {
   }
 
   .content {
+    --scale: 1;
+    transform-origin: 0 0;
+    transform: scaleY(var(--scale));
     padding-bottom: 1em;
   }
 

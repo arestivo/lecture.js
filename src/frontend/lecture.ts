@@ -14,16 +14,14 @@ function fixSlideDimensions(ratio : number) {
   const root = <HTMLElement>document.querySelector(':root')
   root.style.fontSize = `${browserWidth / 80}px`
 
-  const slides = <NodeListOf<HTMLElement>> document.querySelectorAll('article.slide')
-  for (let i = 0, slide; slide = slides[i]; i += 1) {
-    const paddingTop = parseInt(getStyle(slide, 'padding-top'))
-    const paddingRight = parseInt(getStyle(slide, 'padding-right'))
-    const paddingBottom = parseInt(getStyle(slide, 'padding-bottom'))
-    const paddingLeft = parseInt(getStyle(slide, 'padding-left'))
+  const firstSlide = <HTMLElement> document.querySelector('article.slide')
+  const paddingTop = parseInt(getStyle(firstSlide, 'padding-top'))
+  const paddingRight = parseInt(getStyle(firstSlide, 'padding-right'))
+  const paddingBottom = parseInt(getStyle(firstSlide, 'padding-bottom'))
+  const paddingLeft = parseInt(getStyle(firstSlide, 'padding-left'))
 
-    slide.style.width = `${browserWidth - paddingLeft - paddingRight}px`
-    slide.style.height = `${browserHeight - paddingTop - paddingBottom}px`
-  }
+  root.style.setProperty('--slide-width', `${browserWidth - paddingLeft - paddingRight}px`)
+  root.style.setProperty('--slide-height', `${browserHeight - paddingTop - paddingBottom}px`)
 
   setTimeout(resizeSlideContent, 100)
 }
@@ -39,17 +37,16 @@ function resizeSlideContent() {
   const content = <HTMLElement> document.querySelector(`article[id='${number}'] .content`)
   if (content == null) return
 
-  content.style.transform = 'scaleY(1)'
+  content.style.removeProperty('--scale')
   resizer.style.overflow = 'auto'
 
   if (resizer.clientHeight < content.clientHeight) {
     const scale = resizer.clientHeight / content.clientHeight
 
-    content.style.transformOrigin = '0 0'
-    content.style.transform = `scaleY(${scale})`
+    content.style.setProperty('--scale', scale.toString())
   }
 
-  resizer.style.overflow = 'hidden'
+  resizer.style.overflow = null
 }
 
 function handleKeyPress(e : KeyboardEvent) {
@@ -113,6 +110,7 @@ function createHeaders() {
 }
 
 let fixDimensions = fixSlideDimensions.bind(window, 4 / 3)
+fixDimensions()
 
 window.addEventListener('load', fixDimensions)
 window.addEventListener('resize', fixDimensions)
